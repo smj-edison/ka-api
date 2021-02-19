@@ -1,0 +1,19 @@
+{
+  "name": "ka-api",
+  "version": "1.0.0",
+  "description": "API for KA's computer science program.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smj-edison/ka-api.git"
+  },
+  "author": "Mason Jones",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smj-edison/ka-api/issues"
+  },
+  "homepage": "https://github.com/smj-edison/ka-api#readme"
+}
