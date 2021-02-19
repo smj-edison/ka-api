@@ -88,6 +88,5 @@ module.exports = {
     cookiesToCookieString,
     getCookieValue,
     cookieToKeyValue,
-    mergeCookies,
-    genCookieHeader
+    mergeCookies
 };
