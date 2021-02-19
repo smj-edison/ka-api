@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const {cookiesToCookieString, getCookieValue} = require("../cookies/cookies.js");
-const getAuthenticatedHeader = require("../auth/getAuthenticatedHeader");
+const getAuthenticatedHeader = require("../auth/getAuthenticatedHeader.js");
 
 /**
  * Make a GET request with the proper authentication on Khan Academy
@@ -58,3 +58,10 @@ async function makeAuthenticatedPutRequest(cookies, url, body, customHeaders={})
 async function makeAuthenticatedDeleteRequest(cookies, url, customHeaders={}) {
     return axios.delete(url, getAuthenticatedHeader(cookies, customHeaders));
 }
+
+module.exports = {
+    makeAuthenticatedGetRequest,
+    makeAuthenticatedPostRequest,
+    makeAuthenticatedPutRequest,
+    makeAuthenticatedDeleteRequest
+};
