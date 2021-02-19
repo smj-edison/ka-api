@@ -4,7 +4,9 @@ const LOGIN_QUERY = require("../queries/loginQuery.js");
 
 const {cookiesToCookieString, getCookieValue, mergeCookies} = require("../cookies/cookies.js");
 const {getSessionCookies} = require("./session.js");
+
 const generateFKey = require("./generateFKey.js");
+const getAuthenticatedHeader = require("./getAuthenticatedHeader.js");
 
 /**
  * Logs into khan academy given a list of current session cookies
@@ -21,12 +23,7 @@ async function loginWithCookies(cookies, username, password) {
             "password": password
         },
         "query": LOGIN_QUERY
-    }, { 
-        "headers": {
-            "Cookie": cookiesToCookieString(cookies),
-            "x-ka-fkey": getCookieValue(cookies, "fkey")
-        }
-    }).then((result) => {
+    }, getAuthenticatedHeader(cookies)).then((result) => {
         return result.headers["set-cookie"];
     });
 }

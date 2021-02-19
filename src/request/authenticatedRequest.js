@@ -1,6 +1,7 @@
 const axios = require("axios");
 
 const {cookiesToCookieString, getCookieValue} = require("../cookies/cookies.js");
+const getAuthenticatedHeader = require("../auth/getAuthenticatedHeader");
 
 /**
  * Make a GET request with the proper authentication on Khan Academy
@@ -12,13 +13,7 @@ const {cookiesToCookieString, getCookieValue} = require("../cookies/cookies.js")
  * @returns {Promise} A promise that resolves to the response
  */
 async function makeAuthenticatedGetRequest(cookies, url, customHeaders={}) {
-    return axios.get(url, {
-        "headers": {
-            "Cookie": cookiesToCookieString(cookies),
-            "X-KA-FKey": getCookieValue(cookies, "fkey"),
-            ...customHeaders
-        }
-    });
+    return axios.get(url, getAuthenticatedHeader(cookies, customHeaders));
 }
 
 /**
@@ -32,13 +27,7 @@ async function makeAuthenticatedGetRequest(cookies, url, customHeaders={}) {
  * @returns {Promise} A promise that resolves to the response
  */
 async function makeAuthenticatedPostRequest(cookies, url, body, customHeaders={}) {
-    return axios.post(url, body, {
-        "headers": {
-            "Cookie": cookiesToCookieString(cookies),
-            "X-KA-FKey": getCookieValue(cookies, "fkey"),
-            ...customHeaders
-        }
-    });
+    return axios.post(url, body, getAuthenticatedHeader(cookies, customHeaders));
 }
 
 /**
@@ -53,13 +42,7 @@ async function makeAuthenticatedPostRequest(cookies, url, body, customHeaders={}
  * 
  */
 async function makeAuthenticatedPutRequest(cookies, url, body, customHeaders={}) {
-    return axios.put(url, body, {
-        "headers": {
-            "Cookie": cookiesToCookieString(cookies),
-            "X-KA-FKey": getCookieValue(cookies, "fkey"),
-            ...customHeaders
-        }
-    });
+    return axios.put(url, body, getAuthenticatedHeader(cookies, customHeaders));
 }
 
 /**
@@ -73,11 +56,5 @@ async function makeAuthenticatedPutRequest(cookies, url, body, customHeaders={})
  * 
  */
 async function makeAuthenticatedDeleteRequest(cookies, url, customHeaders={}) {
-    return axios.delete(url, {
-        "headers": {
-            "Cookie": cookiesToCookieString(cookies),
-            "X-KA-FKey": getCookieValue(cookies, "fkey"),
-            ...customHeaders
-        }
-    })
+    return axios.delete(url, getAuthenticatedHeader(cookies, customHeaders));
 }
