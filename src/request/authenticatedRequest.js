@@ -6,7 +6,7 @@ const getAuthenticatedHeader = require("../auth/getAuthenticatedHeader.js");
 /**
  * Make a GET request with the proper authentication on Khan Academy
  * 
- * @param {Array} cookies A list of cookies returned from the server
+ * @param {Array} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} url The url on Khan Academy to make the GET request
  * @param {object} customHeaders Object of custom headers
  *
@@ -19,7 +19,7 @@ async function makeAuthenticatedGetRequest(cookies, url, customHeaders={}) {
 /**
  * Make a POST request with the proper authentication on Khan Academy
  * 
- * @param {Array} cookies A list of cookies returned from the server
+ * @param {Array} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} url The url on Khan Academy to make the POST request
  * @param {object} body The JSON body of the POST request
  * @param {object} customHeaders Object of custom headers
@@ -48,7 +48,7 @@ async function makeAuthenticatedPutRequest(cookies, url, body, customHeaders={})
 /**
  * Make a DELETE request with the proper authentication on Khan Academy
  * 
- * @param {Object} cookies A list of cookies returned from the server
+ * @param {Object} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} url The resource to delete
  * @param {object} customHeaders Object of custom headers
  *

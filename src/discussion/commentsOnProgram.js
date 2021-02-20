@@ -43,7 +43,7 @@ async function getProgramCommentDetails(programId, commentExpandKey, commentType
 /**
  * Adds a comment on the program
  * 
- * @param {Array<string>} cookies
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} programId - The ID of the program
  * @param {string} text - The content of the comment
  * @param {("comments","questions")} commentType - Whether adding a comment or a question 
@@ -66,7 +66,7 @@ async function commentOnProgram(cookies, programId, text, commentType="comments"
 /**
  * Deletes a comment on a program
  * 
- * @param {Array<string>} cookies
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} commentKaencrypted - The kaencrypted id of the comment
  */
 async function deleteProgramComment(cookies, commentKaencrypted) {

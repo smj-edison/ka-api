@@ -18,7 +18,7 @@ function cookieToKeyValue(cookie) {
  *     'cookie2=value2; expires=Wed, 31 Dec 1969 16:00:00 GMT; path=/;']
  * Example output: cookie1=value1; cookie2=value2
  * 
- * @param {Array<string>} cookies 
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  * @returns {string} - Cookie string sent to server
  */
 function cookiesToCookieString(rawCookies) {
@@ -29,7 +29,7 @@ function cookiesToCookieString(rawCookies) {
 
 /**
  * Returns a cookie's value given a list of cookies in the form ["cookie1=value1", "cookie2=value2"]
- * @param {Array<string>} cookies 
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} cookieName
  * 
  * @returns {string} - The cookie value requested
@@ -74,7 +74,7 @@ function mergeCookies(oldCookies, newCookies) {
 /**
  * Given a list of cookies, will generate the header necessary for an axios request with cookies
  * 
- * @param {Array<string>} cookies 
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  */
 function genAxiosCookieHeader(cookies) {
     return {

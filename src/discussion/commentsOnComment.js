@@ -18,7 +18,7 @@ async function getCommentsOnComment(commentExpandKey) {
 /**
  * Post a comment on someone else's comment
  * 
- * @param {Array<string>} cookies - List of cookies
+ * @param {Array<string>} cookies A list of cookies returned from the server (set-cookie header)
  * @param {string} commentExpandKey - The comments' expandKey property
  * @param {string} text The text to post
  */
