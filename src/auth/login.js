@@ -11,7 +11,7 @@ const getAuthenticatedHeader = require("./getAuthenticatedHeader.js");
 /**
  * Logs into khan academy given a list of current session cookies
  * 
- * @param {Array[string]} cookies 
+ * @param {Array<string>} cookies 
  * @param {string} username 
  * @param {string} password 
  */
