@@ -57,6 +57,7 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
 }
 
 /**
+ * Creates a spin-off of another program
  * 
  * @param {Array<string>} cookies - A list of cookies returned from the server (set-cookie header)
  * @param {string} originalProgram - The original program's ID
@@ -124,7 +125,19 @@ async function updateProgram(cookies, programId, code, settings={}, programJson)
         ...settings
     };
 
-    let url = `https://www.khanacademy.org/api/internal/scratchpads/${programId}?client_dt=${getQueryTime()}&lang=en`;
+    const url = `https://www.khanacademy.org/api/internal/scratchpads/${programId}?client_dt=${getQueryTime()}&lang=en`;
     
     return makeAuthenticatedPutRequest(cookies, url, jsonToSend);
+}
+
+/**
+ * Deletes a program
+ * 
+ * @param {Array} cookies - An array of set-cookie response headers from axios
+ * @param {string} programId - The program ID
+ */
+async function deleteProgram(cookies, programId) {
+    const url = `https://www.khanacademy.org/api/internal/scratchpads/${programId}?client_dt=${getQueryTime()}&lang=en`;
+    
+    return makeDeleteRequest(url, cookies);
 }
