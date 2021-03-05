@@ -99,4 +99,4 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
 }
 `;
 
-module.exports = getFullUserProfileQuery;
+module.exports = GET_FULL_USER_PROFILE_QUERY;
