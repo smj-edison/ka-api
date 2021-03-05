@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const DEFAULT_PROGRAM_JSON = require("./defaultProgramJson.js");
 
-const {makeAuthenticatedPostRequest, makeAuthenticatedPutRequest} = require("../request/authenticatedRequest.js");
+const {makeAuthenticatedPostRequest, makeAuthenticatedPutRequest, makeAuthenticatedDeleteRequest} = require("../request/authenticatedRequest.js");
 const getQueryTime = require("./getQueryTime.js");
 
 
@@ -139,7 +139,7 @@ async function updateProgram(cookies, programId, code, settings={}, programJson)
 async function deleteProgram(cookies, programId) {
     const url = `https://www.khanacademy.org/api/internal/scratchpads/${programId}?client_dt=${getQueryTime()}&lang=en`;
     
-    return makeDeleteRequest(url, cookies);
+    return makeAuthenticatedDeleteRequest(cookies, url);
 }
 
 module.exports = {
