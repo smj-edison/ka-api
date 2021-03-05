@@ -141,3 +141,11 @@ async function deleteProgram(cookies, programId) {
     
     return makeDeleteRequest(url, cookies);
 }
+
+module.exports = {
+    getProgramJSON,
+    newProgram,
+    spinOffProgram,
+    updateProgram,
+    deleteProgram
+};
