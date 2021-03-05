@@ -1,31 +1,33 @@
-module.auth = {
+module.exports = {};
+
+module.exports.auth = {
     ...require("./auth/login.js"),
     ...require("./auth/session.js"),
     getAuthenticatedHeader: require("./auth/getAuthenticatedHeader.js")
 };
 
-module.cookies = {
+module.exports.cookies = {
     ...require("./cookies/cookies.js")
 };
 
-module.discussion = {
+module.exports.discussion = {
     ...require("./discussion/commentsOnComment.js"),
     ...require("./discussion/commentsOnProgram.js")
 };
 
-module.notifications = {
+module.exports.notifications = {
     ...require("./notifications/commentNotifications.js"),
     ...require("./notifications/notifications.js")
 };
 
-module.profile = {
+module.exports.profile = {
     getProfileInfo: require("./profile/getProfileInfo.js")
 };
 
-module.programs = {
+module.exports.programs = {
     ...require("./programs/programs.js")
 };
 
-module.request = {
+module.exports.request = {
     ...require("./request/authenticatedRequest.js")
 };
