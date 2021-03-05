@@ -57,12 +57,52 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
 }
 
 /**
+ * 
+ * @param {Array<string>} cookies - A list of cookies returned from the server (set-cookie header)
+ * @param {string} originalProgram - The original program's ID
+ * @param {string} code - The code in the spinoff
+ * @param {object} [settings] Settings to override the JSON request
+ * @param {object} [originalProgramJson] The program json if already retrieved (to reduce unneccessary requests)
+ */
+async function spinOffProgram(cookies, originalProgram, code, settings={}, originalProgramJson) {
+    originalProgramJSON = originalProgramJson || await getProgramJSON(originalProgram);
+
+    let jsonToSend = {
+        title: "New program",
+        originRevisionId: originalProgramJSON.revision.id,
+        originScratchpadId: originalProgram,
+        originScratchpadKind: "Scratchpad",
+        revision: {
+            code: code || "",
+            editor_type: "ace_pjs",
+            editorType: "ace_pjs",
+            folds: [],
+            image_url: PROGRAM_DEFAULT_JSON.revision.image_url,
+            mp3Url: "",
+            translatedMp3Url: null,
+            youtubeId: null,
+            playback: "",
+            tests: "",
+            config_version: 4,
+            configVersion: 4,
+            topic_slug: "computer-programming"
+        },
+        ...settings
+    };
+
+    let url = `https://www.khanacademy.org/api/internal/scratchpads?client_dt=${getQueryTime()}&lang=en`;
+
+    return makeAuthenticatedPostRequest(cookies, url, jsonToSend);
+}
+
+/**
  * Updates an existing program based on the parameters
  * 
  * @param {Array} cookies An array of set-cookie response headers from axios
  * @param {string} programId The program's ID being updated
  * @param {string} code The code
  * @param {object} [settings] Settings to override the JSON request
+ * @param {object} [programJson] The program json if already retrieved (to reduce unneccessary requests)
  */
 async function updateProgram(cookies, programId, code, settings={}, programJson) {
     programJson = programJson || await getProgramJSON(programId); //get the program's JSON, is this necessary?
