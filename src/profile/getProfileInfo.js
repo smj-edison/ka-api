@@ -1,6 +1,5 @@
 const {makeAuthenticatedPostRequest} = require("../request/authenticatedRequest.js");
 
-const {CommandError} = require("./command_error");
 const GET_FULL_USER_PROFILE_QUERY = require("../queries/getFullUserProfileQuery.js");
 
 /**
