@@ -2,7 +2,7 @@
   "name": "ka-api",
   "version": "1.0.0",
   "description": "API for KA's computer science program.",
-  "main": "src/index.js",
+  "main": "src/ka_api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
