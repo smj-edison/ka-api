@@ -1,6 +1,6 @@
 {
   "name": "ka-api",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "API for KA's computer science program.",
   "main": "src/ka_api.js",
   "scripts": {

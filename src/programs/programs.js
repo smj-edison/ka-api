@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const DEFAULT_PROGRAM_JSON = require("./defaultProgramJson.js");
+const PROGRAM_DEFAULT_JSON = require("./defaultProgramJson.js");
 
 const {makeAuthenticatedPostRequest, makeAuthenticatedPutRequest, makeAuthenticatedDeleteRequest} = require("../request/authenticatedRequest.js");
 const getQueryTime = require("./getQueryTime.js");
