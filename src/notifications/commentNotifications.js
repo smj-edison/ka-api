@@ -15,7 +15,7 @@ async function getNotificationCommentDetails(notificationJson, prerequestedComme
     let comments = prerequestedComments || (await getCommentsOnComment(feedbackHierarchy[feedbackHierarchy.length - 1]));
 
     return {
-        post: comments.find(comment => comment.expandKey === notification.feedback),
+        post: comments.find(comment => comment.expandKey === notificationJson.feedback),
         posts: comments
     };
 }
