@@ -16,14 +16,12 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
     isCreator: hasPermission(name: "has_creator_role", scope: ANY_ON_CURRENT_LOCALE)
     isPublisher: hasPermission(name: "can_publish", scope: ANY_ON_CURRENT_LOCALE)
     isModerator: hasPermission(name: "can_moderate_users", scope: GLOBAL)
-    isPublic
     isParent
     isSatStudent
     isTeacher
     isDataCollectible
     isChild
     isOrphan
-    isActivityAccessible
     isCoachingLoggedInUser
     canModifyCoaches
     nickname
@@ -74,7 +72,6 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
     newNotificationCount
     canHellban: hasPermission(name: "can_ban_users", scope: GLOBAL)
     canMessageUsers: hasPermission(name: "can_send_moderator_messages", scope: GLOBAL)
-    canEvalCsProjects
     discussionBanned
     isSelf: isActor
     hasStudents: hasCoachees
@@ -84,8 +81,6 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
     badgeCounts
     homepageUrl
     isMidsignupPhantom
-    streakLastExtended
-    streakLastLength
     includesDistrictOwnedData
     preferredKaLocale {
       id
@@ -94,9 +89,28 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
       __typename
     }
     transferAuthUrl(pathname: "")
+    underAgeGate {
+      parentEmail
+      daysUntilCutoff
+      approvalGivenAt
+      __typename
+    }
+    authEmails
+    signupDataIfUnverified {
+      email
+      emailBounced
+      __typename
+    }
+    pendingEmailVerifications {
+      email
+      unverifiedAuthEmailToken
+      __typename
+    }
+    tosAccepted
+    shouldShowAgeCheck
     __typename
   }
-}
-`;
+  actorIsImpersonatingUser
+}`;
 
 module.exports = GET_FULL_USER_PROFILE_QUERY;
