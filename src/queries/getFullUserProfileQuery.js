@@ -111,6 +111,7 @@ const GET_FULL_USER_PROFILE_QUERY = "" +
     __typename
   }
   actorIsImpersonatingUser
-}`;
+}
+`;
 
 module.exports = GET_FULL_USER_PROFILE_QUERY;
