@@ -10,7 +10,7 @@ function getAuthenticatedHeader(cookies, customHeaders={}) {
     return {
         "headers": {
             "Cookie": cookiesToCookieString(cookies),
-            "X-KA-FKey": getCookieValue(cookies, "fkey"),
+            "x-ka-fkey": getCookieValue(cookies, "fkey"),
             ...customHeaders
         }
     };
