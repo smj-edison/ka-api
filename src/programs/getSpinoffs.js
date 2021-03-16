@@ -4,7 +4,7 @@ const SORTING_TYPE = require("./sortingType.js");
 
 async function getSpinoffs(programId, sortingType, limit) {
     let sortType = 1; // default is most votes
-    const limit = limit || 10000;
+    limit = limit || 10000;
 
     if(sortingType === SORTING_TYPE.MOST_VOTES) {
         sortType = 1;
