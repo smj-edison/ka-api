@@ -25,7 +25,8 @@ module.exports.profile = {
 };
 
 module.exports.programs = {
-    ...require("./programs/programs.js")
+    ...require("./programs/programs.js"),
+    ...require("./programs/getSpinoffs.js")
 };
 
 module.exports.request = {
