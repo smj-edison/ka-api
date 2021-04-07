@@ -82,7 +82,6 @@ async function clearBrandNewNotifications(cookies) {
 module.exports = {
     getNotificationsRequest,
     getNotificationsUntil,
-    getNotificationsUntil,
     getAllBrandNewNotifications,
     clearBrandNewNotifications
 };
