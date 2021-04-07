@@ -5,6 +5,8 @@ const PROGRAM_DEFAULT_JSON = require("./defaultProgramJson.js");
 const {makeAuthenticatedPostRequest, makeAuthenticatedPutRequest, makeAuthenticatedDeleteRequest} = require("../request/authenticatedRequest.js");
 const getQueryTime = require("./getQueryTime.js");
 
+const deepmerge = require("deepmerge");
+
 
 const VALID_PROGRAM_TYPES = ["pjs", "webpage", "sql"];
 
@@ -32,7 +34,7 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
         throw `Program type needs to be of type ${VALID_PROGRAM_TYPES}`;
     }
 
-    let jsonToSend = {
+    let jsonToSend = deepmerge({
         title: "New program",
         translatedTitle: "New program",
         category: null,
@@ -47,9 +49,8 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
             image_url: PROGRAM_DEFAULT_JSON.revision.image_url,
             config_version: 4,
             topic_slug: "computer-programming"
-        },
-        ...settings
-    };
+        }
+    }, settings);
 
     let url = `https://www.khanacademy.org/api/internal/scratchpads?client_dt=${getQueryTime()}&lang=en`;
 
@@ -68,7 +69,7 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
 async function spinOffProgram(cookies, originalProgram, code, settings={}, originalProgramJson) {
     originalProgramJSON = originalProgramJson || await getProgramJSON(originalProgram);
 
-    let jsonToSend = {
+    let jsonToSend = deepmerge({
         title: "New program",
         originRevisionId: originalProgramJSON.revision.id,
         originScratchpadId: originalProgram,
@@ -87,9 +88,8 @@ async function spinOffProgram(cookies, originalProgram, code, settings={}, origi
             config_version: 4,
             configVersion: 4,
             topic_slug: "computer-programming"
-        },
-        ...settings
-    };
+        }
+    }, settings);
 
     let url = `https://www.khanacademy.org/api/internal/scratchpads?client_dt=${getQueryTime()}&lang=en`;
 
@@ -108,7 +108,7 @@ async function spinOffProgram(cookies, originalProgram, code, settings={}, origi
 async function updateProgram(cookies, programId, code, settings={}, programJson) {
     programJson = programJson || await getProgramJSON(programId); //get the program's JSON, is this necessary?
 
-    var jsonToSend = {
+    var jsonToSend = deepmerge({
         ...PROGRAM_DEFAULT_JSON,
         ...programJson,
         "relativeUrl": "/computer-programming/_/" + programId,
@@ -122,8 +122,7 @@ async function updateProgram(cookies, programId, code, settings={}, programJson)
         "trustedRevision": {
             "created": (new Date()).toISOString()
         },
-        ...settings
-    };
+    }, settings);
 
     const url = `https://www.khanacademy.org/api/internal/scratchpads/${programId}?client_dt=${getQueryTime()}&lang=en`;
     
