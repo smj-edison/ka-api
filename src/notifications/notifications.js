@@ -14,11 +14,13 @@ async function getNotificationsRequest(cookies, cursor) {
 }
 
 /**
+ * Will go through the notifications of the profile until checkFunction returns false
  * 
  * @param {Array<string>} cookies - A list of cookies returned from the server (set-cookie header)
+ * @param {Function} checkFunction - A function that when returns false, it will stop the notification process
  * @param {number} [maxDepth=10] - The maximum depth in the notifications the code will request
  */
-async function getAllBrandNewNotifications(cookies, maxDepth=10) {
+async function getNotificationsUntil(cookies, checkFunction, maxDepth=10) {
     let currentCursor;
     let notifications = [];
 
@@ -30,23 +32,40 @@ async function getAllBrandNewNotifications(cookies, maxDepth=10) {
         const nextCursor = response.cursor;
 
         const notifs = response.notifications;
+        let notifsToKeep = [];
 
-        // check if there are new notifications
-        if(notifs[notifs.length - 1].brandNew) {
-            currentCursor = nextCursor;
-        } else {
-            currentCursor = null;
+        for(let i = 0; i < notifs.length; i++) {
+            if(checkFunction(notifs[i])) {
+                notifsToKeep.push(notifs[i]);
+            } else {
+                break; // break as soon as anything doesn't meet the criteria
+            }
         }
         
-        // only add brand new notifications
-        notifications.push(...notifs.filter(notif => {
-            return notif.brandNew;
-        }));
+        // if anything was filtered out
+        if(notifsToKeep.length !== notifs.length) { 
+            currentCursor = null;
+        } else {
+            currentCursor = nextCursor;
+        }
+        
+        // only add notifications that meet the criteria
+        notifications.push(...notifsToKeep);
 
         depth++;
     } while(currentCursor && depth < maxDepth);
 
     return notifications;
+}
+
+/**
+ * Will go through the notifications of the profile until a notification isn't brand new
+ * 
+ * @param {Array<string>} cookies - A list of cookies returned from the server (set-cookie header)
+ * @param {number} [maxDepth=10] - The maximum depth in the notifications the code will request
+ */
+async function getAllBrandNewNotifications(cookies, maxDepth=10) {
+    return await getNotificationsUntil(cookies, notif => notif.brandNew, maxDepth);
 }
 
 /**
@@ -62,6 +81,7 @@ async function clearBrandNewNotifications(cookies) {
 
 module.exports = {
     getNotificationsRequest,
+    getNotificationsUntil,
     getAllBrandNewNotifications,
     clearBrandNewNotifications
 };
