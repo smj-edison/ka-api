@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/smj-edison/ka-api#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "deepmerge": "^4.2.2"
   }
 }
