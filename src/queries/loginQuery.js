@@ -7,10 +7,11 @@ const LOGIN_QUERY = "" +
       canAccessDistrictsHomepage
       isTeacher
       hasUnresolvedInvitations
-      transferAuthUrl(pathname: "")
+      transferAuthToken
       preferredKaLocale {
         id
         kaLocale
+        status
         __typename
       }
       __typename
