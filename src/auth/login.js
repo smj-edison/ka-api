@@ -43,7 +43,7 @@ async function login(username, password) {
 
     let sessionCookies = await getSessionCookies();
 
-    sessionCookies.push(`fkey=${generateFKey()}; expires=${(new Date()).toUTCString()}; path=/`);
+    sessionCookies.push(`fkey=${generateFKey()}; expires=${(new Date()).toUTCString()}; samesite=Lax; path=/`);
 
     let loginCookies = await loginWithCookies(sessionCookies, username, password);
     let cookies = mergeCookies(sessionCookies, loginCookies);
