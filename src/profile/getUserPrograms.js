@@ -1,5 +1,5 @@
 const axios = require("axios");
-const SORTING_TYPE = require("./sortingType.js");
+const SORTING_TYPE = require("../programs/sortingType.js");
 
 /**
  * 
