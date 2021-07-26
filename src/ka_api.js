@@ -32,3 +32,5 @@ module.exports.programs = {
 module.exports.request = {
     ...require("./request/authenticatedRequest.js")
 };
+
+module.exports.config = require("./config.js");
