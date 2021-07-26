@@ -5,7 +5,11 @@ const PROGRAM_DEFAULT_JSON = require("./defaultProgramJson.js");
 const {makeAuthenticatedPostRequest, makeAuthenticatedPutRequest, makeAuthenticatedDeleteRequest} = require("../request/authenticatedRequest.js");
 const getQueryTime = require("./getQueryTime.js");
 
+const checkString = require("../moderation/check-string.js");
+
 const deepmerge = require("deepmerge");
+
+const config = require("../config.js");
 
 
 const VALID_PROGRAM_TYPES = ["pjs", "webpage", "sql"];
@@ -32,6 +36,10 @@ async function getProgramJSON(id) {
 async function newProgram(cookies, code, settings={}, type="pjs") {
     if(!VALID_PROGRAM_TYPES.includes(type)) {
         throw `Program type needs to be of type ${VALID_PROGRAM_TYPES}`;
+    }
+
+    if(checkString(settings.title || "")) {
+        throw "Cannot create a program with bad words in it.";
     }
 
     let jsonToSend = deepmerge({
@@ -68,6 +76,10 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
  */
 async function spinOffProgram(cookies, originalProgram, code, settings={}, originalProgramJson) {
     originalProgramJSON = originalProgramJson || await getProgramJSON(originalProgram);
+
+    if(checkString(settings.title || "")) {
+        throw "Cannot create a program with bad words in it.";
+    }
 
     let jsonToSend = deepmerge({
         title: "New program",
@@ -107,6 +119,10 @@ async function spinOffProgram(cookies, originalProgram, code, settings={}, origi
  */
 async function updateProgram(cookies, programId, code, settings={}, programJson) {
     programJson = programJson || await getProgramJSON(programId); //get the program's JSON, is this necessary?
+
+    if(checkString(settings.title || "")) {
+        throw "Cannot create a program with bad words in it.";
+    }
 
     var jsonToSend = deepmerge({
         ...PROGRAM_DEFAULT_JSON,
