@@ -38,7 +38,7 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
         throw `Program type needs to be of type ${VALID_PROGRAM_TYPES}`;
     }
 
-    if(checkString(settings.title || "")) {
+    if(config.filterBadwords && checkString(settings.title || "")) {
         throw "Cannot create a program with bad words in it.";
     }
 
@@ -77,7 +77,7 @@ async function newProgram(cookies, code, settings={}, type="pjs") {
 async function spinOffProgram(cookies, originalProgram, code, settings={}, originalProgramJson) {
     originalProgramJSON = originalProgramJson || await getProgramJSON(originalProgram);
 
-    if(checkString(settings.title || "")) {
+    if(config.filterBadwords && checkString(settings.title || "")) {
         throw "Cannot create a program with bad words in it.";
     }
 
@@ -120,7 +120,7 @@ async function spinOffProgram(cookies, originalProgram, code, settings={}, origi
 async function updateProgram(cookies, programId, code, settings={}, programJson) {
     programJson = programJson || await getProgramJSON(programId); //get the program's JSON, is this necessary?
 
-    if(checkString(settings.title || "")) {
+    if(config.filterBadwords && checkString(settings.title || "")) {
         throw "Cannot create a program with bad words in it.";
     }
 
