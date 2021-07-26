@@ -22,7 +22,7 @@ module.exports.notifications = {
 
 module.exports.profile = {
     getProfileInfo: require("./profile/getProfileInfo.js"),
-    getUserPrograms: require("./profile/getUserPrograms.js")
+    ...require("./profile/getUserPrograms.js")
 };
 
 module.exports.programs = {
